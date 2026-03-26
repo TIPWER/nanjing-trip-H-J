@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>江南五日 · 闺蜜出行手册</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0d0b;
+  --bg2: #161310;
+  --surface: #1e1a16;
+  --surface2: #252018;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --cream: #f0e6d3;
+  --cream2: #d4c4a8;
+  --muted: #7a6e60;
+  --red: #c94040;
+  --red-glow: rgba(201,64,64,0.15);
+  --gold: #c8973a;
+  --gold2: #e8b84b;
+  --gold-glow: rgba(200,151,58,0.12);
+  --green: #4e8c5f;
+  --green2: #6ab07a;
+  --green-glow: rgba(78,140,95,0.12);
+  --blue: #3a6fa8;
+  --blue2: #5a9fd4;
+  --blue-glow: rgba(58,111,168,0.12);
+  --purple: #7a5a9a;
+  --purple2: #a07ac4;
+  --purple-glow: rgba(122,90,154,0.12);
+
+  --nj: #c94040;
+  --wx: #4e8c5f;
+  --sz: #3a6fa8;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 60px 24px 48px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--bg2);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 0%, rgba(201,64,64,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 100%, rgba(58,111,168,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(78,140,95,0.06) 0%, transparent 60%);
+}
+
+.hero-kicker {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-kicker::before, .hero-kicker::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+.hero-kicker::after { background: linear-gradient(to left, transparent, var(--gold)); }
+
+.hero-title {
+  position: relative;
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(42px, 10vw, 72px);
+  font-weight: 900;
+  letter-spacing: 16px;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero-title .highlight { color: var(--gold2); }
+
+.hero-sub {
+  position: relative;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 4px;
+  margin-bottom: 32px;
+}
+
+.city-pills {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.city-pill {
+  padding: 7px 18px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid;
+}
+
+.pill-nj { color: var(--nj); border-color: rgba(201,64,64,0.4); background: var(--red-glow); }
+.pill-wx { color: var(--green2); border-color: rgba(78,140,95,0.4); background: var(--green-glow); }
+.pill-sz { color: var(--blue2); border-color: rgba(58,111,168,0.4); background: var(--blue-glow); }
+
+.city-pill:hover { transform: translateY(-2px); filter: brightness(1.2); }
+
+/* ===== TAB NAV ===== */
+.tab-nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(15,13,11,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.tab-btn.active-nj { color: var(--nj); border-bottom-color: var(--nj); }
+.tab-btn.active-wx { color: var(--green2); border-bottom-color: var(--green2); }
+.tab-btn.active-sz { color: var(--blue2); border-bottom-color: var(--blue2); }
+.tab-btn.active-bag { color: var(--gold2); border-bottom-color: var(--gold2); }
+
+/* ===== SECTIONS ===== */
+.section { display: none; padding: 0 0 40px; }
+.section.active { display: block; }
+
+/* ===== PROGRESS ===== */
+.progress-bar-section {
+  padding: 16px 16px 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-lbl { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.progress-num { font-family: 'Noto Serif SC', serif; font-size: 13px; font-weight: 700; }
+
+.p-track { height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+.p-fill { height: 100%; border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+.p-nj { background: var(--nj); }
+.p-wx { background: var(--green2); }
+.p-sz { background: var(--blue2); }
+
+/* ===== DAY HEADER ===== */
+.day-hdr {
+  padding: 20px 16px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.day-hdr-nj { background: linear-gradient(135deg, #1a0808 0%, #120808 100%); }
+.day-hdr-wx { background: linear-gradient(135deg, #081a0e 0%, #081208 100%); }
+.day-hdr-sz { background: linear-gradient(135deg, #08101a 0%, #080e14 100%); }
+
+.day-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.badge-nj { background: rgba(201,64,64,0.15); border: 1px solid rgba(201,64,64,0.3); color: #e07070; }
+.badge-wx { background: rgba(78,140,95,0.15); border: 1px solid rgba(78,140,95,0.3); color: #80c490; }
+.badge-sz { background: rgba(58,111,168,0.15); border: 1px solid rgba(58,111,168,0.3); color: #80b4e0; }
+
+.day-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+.day-route {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+/* ===== STOP LIST ===== */
+.stops { padding: 12px 14px; display: flex; flex-direction: column; gap: 0; }
+
+.stop-row {
+  display: flex;
+  gap: 0;
+}
+
+.stop-tl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 34px;
+  flex-shrink: 0;
+}
+
+.stop-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.dot-nj { background: var(--nj); }
+.dot-wx { background: var(--green); }
+.dot-sz { background: var(--blue); }
+
+.stop-line {
+  width: 1px;
+  flex: 1;
+  min-height: 14px;
+}
+.line-nj { background: rgba(201,64,64,0.2); }
+.line-wx { background: rgba(78,140,95,0.2); }
+.line-sz { background: rgba(58,111,168,0.2); }
+.stop-row:last-child .stop-line { display: none; }
+
+.stop-body {
+  flex: 1;
+  padding: 2px 0 18px 10px;
+}
+
+.stop-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.stop-card:hover { border-color: var(--border2); background: var(--surface2); }
+.stop-card.done { opacity: 0.5; }
+
+.sc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.sc-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
+
+.sc-name.struck { text-decoration: line-through; color: var(--muted); }
+
+.sc-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.map-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 0.15s;
+  border: 1px solid;
+  color: var(--gold);
+  border-color: rgba(200,151,58,0.35);
+  background: var(--gold-glow);
+}
+
+.map-btn:hover { background: rgba(200,151,58,0.2); transform: scale(1.03); }
+
+.cb-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: transparent;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.cb-btn.on { background: var(--green); border-color: var(--green); color: white; }
+
+.sc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 7px;
+}
+
+.tag {
+  font-size: 9.5px;
+  padding: 2px 7px;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+.t-price { background: rgba(200,151,58,0.1); color: var(--gold); border: 1px solid rgba(200,151,58,0.2); }
+.t-time  { background: rgba(78,140,95,0.1); color: var(--green2); border: 1px solid rgba(78,140,95,0.2); }
+.t-metro { background: rgba(58,111,168,0.1); color: var(--blue2); border: 1px solid rgba(58,111,168,0.2); }
+.t-photo { background: rgba(201,64,64,0.1); color: #e07070; border: 1px solid rgba(201,64,64,0.2); }
+.t-night { background: rgba(122,90,154,0.1); color: var(--purple2); border: 1px solid rgba(122,90,154,0.2); }
+.t-food  { background: rgba(180,100,50,0.1); color: #d0905a; border: 1px solid rgba(180,100,50,0.2); }
+
+.sc-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* transport connector */
+.transit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 5px 0 4px 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ===== FOOD SECTION ===== */
+.food-section {
+  margin: 4px 14px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.food-hdr {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.food-hdr-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold2);
+  letter-spacing: 1px;
+}
+
+.food-arrow { margin-left: auto; font-size: 10px; color: var(--muted); transition: transform 0.2s; }
+.food-arrow.open { transform: rotate(180deg); }
+
+.food-body {
+  display: none;
+  padding: 12px 14px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.food-body.open { display: flex; }
+
+.food-chip {
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  background: rgba(200,151,58,0.08);
+  border: 1px solid rgba(200,151,58,0.18);
+  color: var(--cream2);
+}
+
+/* ===== NOTE BOX ===== */
+.note-box {
+  margin: 0 14px 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border-left: 3px solid;
+}
+
+.note-nj { background: rgba(201,64,64,0.07); border-left-color: var(--nj); }
+.note-wx { background: rgba(78,140,95,0.07); border-left-color: var(--green2); }
+.note-sz { background: rgba(58,111,168,0.07); border-left-color: var(--blue2); }
+
+.note-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.note-nj .note-title { color: #e07070; }
+.note-wx .note-title { color: var(--green2); }
+.note-sz .note-title { color: var(--blue2); }
+
+.note-text { font-size: 11.5px; color: var(--muted); line-height: 1.7; }
+
+/* ===== PACKING LIST ===== */
+.pack-section { padding: 16px 14px; }
+
+.pack-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  padding-left: 2px;
+}
+
+.pack-sub { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 16px; padding-left: 2px; }
+
+.pack-cat {
+  margin-bottom: 16px;
+}
+
+.pack-cat-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pack-cat-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.pack-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.pack-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12px;
+  color: var(--cream2);
+}
+
+.pack-item:hover { border-color: var(--border2); }
+.pack-item.packed { opacity: 0.5; }
+.pack-item.packed .pack-icon { filter: grayscale(1); }
+
+.pack-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.pack-item.packed .pack-check {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+.pack-icon { font-size: 14px; }
+
+.pack-progress {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.pack-progress-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.pack-progress-lbl { font-size: 11px; color: var(--muted); }
+.pack-progress-num { font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--gold2); font-weight: 700; }
+
+/* ===== SCROLL INDICATOR ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stop-row { animation: fadeUp 0.3s ease both; }
+.stop-row:nth-child(1) { animation-delay: 0.05s; }
+.stop-row:nth-child(2) { animation-delay: 0.1s; }
+.stop-row:nth-child(3) { animation-delay: 0.15s; }
+.stop-row:nth-child(4) { animation-delay: 0.2s; }
+.stop-row:nth-child(5) { animation-delay: 0.25s; }
+.stop-row:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes popIn {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+.pop { animation: popIn 0.2s ease; }
+
+/* map embed */
+.map-frame {
+  margin: 8px 14px 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.map-placeholder {
+  background: var(--surface);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.map-placeholder-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold2);
+  letter-spacing: 1px;
+}
+
+.map-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.map-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--cream2);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.map-link:hover { border-color: var(--gold); color: var(--gold2); }
+.map-link-icon { font-size: 14px; }
+
+/* SECTION DIVIDER */
+.sec-div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin: 4px 0;
+}
+.sec-div span { font-size: 10px; letter-spacing: 2px; color: var(--muted); white-space: nowrap; }
+.sec-div-line { flex: 1; height: 1px; background: var(--border); }
+
+/* complete banner */
+.done-banner {
+  display: none;
+  margin: 10px 14px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(78,140,95,0.15), rgba(78,140,95,0.05));
+  border: 1px solid rgba(78,140,95,0.3);
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: var(--green2);
+  letter-spacing: 2px;
+}
+.done-banner.show { display: block; }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-kicker">闺蜜出行 · 2025</div>
+  <div class="hero-title">江<span class="highlight">南</span>五日</div>
+  <div class="hero-sub">南京 · 无锡 · 苏州</div>
+  <div class="city-pills">
+    <div class="city-pill pill-nj" onclick="switchTab('nj')">🏯 南京 周五周六</div>
+    <div class="city-pill pill-wx" onclick="switchTab('wx')">🌿 无锡 周日</div>
+    <div class="city-pill pill-sz" onclick="switchTab('sz')">🌊 苏州 周一周二</div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn active-nj" onclick="switchTab('nj')" id="tab-nj">🏯 南京</button>
+  <button class="tab-btn" onclick="switchTab('wx')" id="tab-wx">🌿 无锡</button>
+  <button class="tab-btn" onclick="switchTab('sz')" id="tab-sz">🌊 苏州</button>
+  <button class="tab-btn" onclick="switchTab('bag')" id="tab-bag">🎒 行李</button>
+</div>
+
+<!-- ============================== NANJING ============================== -->
+<div class="section active" id="sec-nj">
+  <div class="progress-bar-section">
+    <div class="progress-row">
+      <div class="progress-lbl">南京打卡进度</div>
+      <div class="progress-num" id="nj-cnt" style="color:var(--nj)">0 / 11</div>
+    </div>
+    <div class="p-track"><div class="p-fill p-nj" id="nj-bar" style="width:0%"></div></div>
+  </div>
+
+  <!-- DAY 1 Friday -->
+  <div class="day-hdr day-hdr-nj">
+    <div class="day-badge badge-nj">· 周五 DAY 1 ·</div>
+    <div class="day-title">玄武 → 城墙 → 鸡鸣寺 → 新街口 → 颐和路</div>
+    <div class="day-route">地铁1号线为主 · 轻松半天打卡 · 晚上颐和路散步</div>
+  </div>
+
+  <div class="stops" id="nj-stops-1">
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">1</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-1" onclick="toggle('nj-1','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-1-name">玄武湖</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7967,32.0723&name=玄武湖&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-1">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 免费</span>
+            <span class="tag t-time">⏰ 6:00–22:00</span>
+            <span class="tag t-metro">🚇 1号线玄武门</span>
+            <span class="tag t-photo">📸 别只走主路</span>
+          </div>
+          <div class="sc-desc">进去后往湖中岛走，别只沿主路逛。绕湖走一圈能看到城墙倒影，有很多不同的景。早晨光线最好。</div>
+        </div>
+        <div class="transit">🚶 步行 10 min → 明城墙</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">2</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-2" onclick="toggle('nj-2','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-2-name">南京明城墙</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7810,32.0690&name=南京明城墙台城段&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-2">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 30元</span>
+            <span class="tag t-time">⏰ 8:30–16:30</span>
+            <span class="tag t-photo">📸 城上看城市风景</span>
+          </div>
+          <div class="sc-desc">走在老城墙上，一边是玄武湖，一边是城市，历史感很强。台城段是拍照最好的位置。</div>
+        </div>
+        <div class="transit">🚶 步行 5 min → 鸡鸣寺</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">3</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-3" onclick="toggle('nj-3','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-3-name">鸡鸣寺</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7840,32.0640&name=鸡鸣寺&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-3">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 10元（含香）</span>
+            <span class="tag t-time">⏰ 7:30–17:00</span>
+            <span class="tag t-photo">🌸 春天樱花必去</span>
+          </div>
+          <div class="sc-desc">香火旺、气场好。春天来樱花路绝了，早去人少拍照好。求个签，感受南京最本地的寺庙气氛。</div>
+        </div>
+        <div class="transit">🚇 1号线 → 新街口站</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">4</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-4" onclick="toggle('nj-4','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-4-name">新街口·明瓦廊·科巷</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7963,32.0457&name=科巷&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-4">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 免费</span>
+            <span class="tag t-metro">🚇 1号线新街口</span>
+            <span class="tag t-food">🍜 午饭在这里</span>
+          </div>
+          <div class="sc-desc">
+            <b style="color:var(--cream2)">明瓦廊：</b>易记皮肚面（南京特色，必吃）<br>
+            <b style="color:var(--cream2)">科巷：</b>鸭血粉丝汤 · 鸡汁汤包 · 梅花糕 · 把子肉，本地人常去的小吃街
+          </div>
+        </div>
+        <div class="transit">🚇 地铁 → 颐和路</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">5</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-5" onclick="toggle('nj-5','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-5-name">颐和路</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7713,32.0514&name=颐和路民国建筑群&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-5">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 免费</span>
+            <span class="tag t-photo">📸 民国风小洋楼</span>
+          </div>
+          <div class="sc-desc">梧桐树下的民国别墅区，随手一拍都是大片。傍晚光线最美，闺蜜对走拍超出片。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Day 2 food -->
+  <div class="food-section">
+    <div class="food-hdr" onclick="toggleFood(this)">
+      <span style="font-size:16px">🍜</span>
+      <span class="food-hdr-text">周五美食清单</span>
+      <span class="food-arrow">▼</span>
+    </div>
+    <div class="food-body">
+      <span class="food-chip">皮肚面</span><span class="food-chip">鸭血粉丝汤</span>
+      <span class="food-chip">鸡汁汤包</span><span class="food-chip">梅花糕</span>
+      <span class="food-chip">把子肉</span><span class="food-chip">蟹黄面</span>
+    </div>
+  </div>
+
+  <div class="sec-div"><div class="sec-div-line"></div><span>✦ 周六 ✦</span><div class="sec-div-line"></div></div>
+
+  <!-- Day 2 Saturday -->
+  <div class="day-hdr day-hdr-nj">
+    <div class="day-badge badge-nj">· 周六 DAY 2 ·</div>
+    <div class="day-title">总统府 → 老门东 → 夫子庙 → 秦淮河游船</div>
+    <div class="day-route">下午出发 · 压轴夜景 · 游船体验十里秦淮</div>
+  </div>
+
+  <div class="stops" id="nj-stops-2">
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">6</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-6" onclick="toggle('nj-6','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-6-name">总统府</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7948,32.0515&name=中国近代史遗址博物馆(总统府)&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-6">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 35元</span>
+            <span class="tag t-time">⏰ 8:30–17:00 周一闭馆</span>
+            <span class="tag t-photo">📸 庭院好看</span>
+          </div>
+          <div class="sc-desc">中西合璧历史建筑，庭院层次丰富很出片。了解民国历史，建筑本身就是大片背景。</div>
+        </div>
+        <div class="transit">🚇 地铁 → 夫子庙</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">7</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-7" onclick="toggle('nj-7','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-7-name">老门东 · 三七八巷 · 三条营</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7835,32.0296&name=老门东历史街区&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-7">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 免费</span>
+            <span class="tag t-food">🍡 三七八巷糖藕</span>
+          </div>
+          <div class="sc-desc">
+            老门东本身吃的偏贵，推荐走进旁边的<b style="color:var(--cream2)">三七八巷</b>（糖藕！）和<b style="color:var(--cream2)">三条营</b>，更本地更便宜，老南京烟火气在这里。
+          </div>
+        </div>
+        <div class="transit">🚶 步行 15 min → 夫子庙</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">8</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-8" onclick="toggle('nj-8','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-8-name">夫子庙 · 乌衣巷 · 钞库街</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7843,32.0271&name=乌衣巷&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-8">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 免费</span>
+            <span class="tag t-night">🌙 晚上更美</span>
+            <span class="tag t-photo">📸 过桥走老巷</span>
+          </div>
+          <div class="sc-desc">
+            重点：<b style="color:var(--cream2)">过桥</b>才是本地老巷！乌衣巷、钞库街才是真正的南京市井，别只在景区主街转。晚上灯笼亮起来氛围感拉满。
+          </div>
+        </div>
+        <div class="transit">🚶 步行 3 min → 秦淮河码头</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-nj">9</div><div class="stop-line line-nj"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="nj-9" onclick="toggle('nj-9','nj')">
+          <div class="sc-top">
+            <div class="sc-name" id="nj-9-name">秦淮河游船</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=118.7820,32.0262&name=秦淮河游船中山码头&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-nj-9">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-night">🌙 夜景压轴</span>
+            <span class="tag t-photo">📸 十里秦淮</span>
+          </div>
+          <div class="sc-desc">
+            从<b style="color:var(--cream2)">中山码头</b>到<b style="color:var(--cream2)">浦口码头</b>，坐船看两岸灯光倒影。⚠️ 记得带防蚊喷雾，夏天河边蚊子多！
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="food-section">
+    <div class="food-hdr" onclick="toggleFood(this)">
+      <span style="font-size:16px">🍜</span>
+      <span class="food-hdr-text">南京全程美食清单</span>
+      <span class="food-arrow">▼</span>
+    </div>
+    <div class="food-body">
+      <span class="food-chip">皮肚面</span><span class="food-chip">鸭血粉丝汤</span>
+      <span class="food-chip">鸡汁汤包</span><span class="food-chip">梅花糕</span>
+      <span class="food-chip">把子肉</span><span class="food-chip">蟹黄面</span>
+      <span class="food-chip">糖藕</span><span class="food-chip">传统南京菜</span>
+      <span class="food-chip">江南火锅</span><span class="food-chip">桂花糕</span>
+    </div>
+  </div>
+
+  <!-- Amap links Nanjing -->
+  <div class="map-frame">
+    <div class="map-placeholder">
+      <div class="map-placeholder-title">📍 南京景点高德导航</div>
+      <div class="map-links">
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7967,32.0723&name=玄武湖&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🏞</span>玄武湖</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7840,32.0640&name=鸡鸣寺&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">⛩</span>鸡鸣寺</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7963,32.0457&name=科巷&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🍜</span>科巷小吃</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7713,32.0514&name=颐和路&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🌳</span>颐和路</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7948,32.0515&name=总统府&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🏛</span>总统府</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7835,32.0296&name=老门东&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🏮</span>老门东</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7843,32.0271&name=乌衣巷&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🛤</span>乌衣巷</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=118.7820,32.0262&name=秦淮河游船&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">⛵</span>秦淮游船</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="done-banner" id="nj-done">🎉 南京全部打卡完成！</div>
+</div>
+
+<!-- ============================== WUXI ============================== -->
+<div class="section" id="sec-wx">
+  <div class="progress-bar-section">
+    <div class="progress-row">
+      <div class="progress-lbl">无锡打卡进度</div>
+      <div class="progress-num" id="wx-cnt" style="color:var(--green2)">0 / 4</div>
+    </div>
+    <div class="p-track"><div class="p-fill p-wx" id="wx-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="day-hdr day-hdr-wx">
+    <div class="day-badge badge-wx">· 周日 一日游 ·</div>
+    <div class="day-title">惠山 → 锡惠公园 → 鼋头渚 → 南长街夜游</div>
+    <div class="day-route">8:30出发 · 古镇下午湖景 · 晚上夜市收尾</div>
+  </div>
+
+  <div class="stops">
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-wx">1</div><div class="stop-line line-wx"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="wx-1" onclick="toggle('wx-1','wx')">
+          <div class="sc-top">
+            <div class="sc-name" id="wx-1-name">惠山古镇</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.2730,31.5780&name=惠山古镇&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-wx-1">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 免费</span>
+            <span class="tag t-time">⏰ 8:30–10:00</span>
+            <span class="tag t-photo">📸 庭院古色古香</span>
+          </div>
+          <div class="sc-desc">⚠️ 一定要早上很早去！庭院清静，光线好，人少才能拍到干净的大片。晚去人山人海。</div>
+        </div>
+        <div class="transit">🚶 步行 15 min → 锡惠公园</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-wx">2</div><div class="stop-line line-wx"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="wx-2" onclick="toggle('wx-2','wx')">
+          <div class="sc-top">
+            <div class="sc-name" id="wx-2-name">锡惠公园</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.2748,31.5813&name=锡惠公园&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-wx-2">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-price">🎫 10元</span>
+            <span class="tag t-time">⏰ 10:00–11:00</span>
+          </div>
+          <div class="sc-desc">惠山旁边步行直达，公园内有古寺和山景，清幽自然。顺路溜达不费腿。</div>
+        </div>
+        <div class="transit">🚌 公交/打车 → 鼋头渚</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-wx">3</div><div class="stop-line line-wx"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="wx-3" onclick="toggle('wx-3','wx')">
+          <div class="sc-top">
+            <div class="sc-name" id="wx-3-name">鼋头渚</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.2267,31.5100&name=鼋头渚充山大门&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-wx-3">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-time">⏰ 12:00–18:00</span>
+            <span class="tag t-photo">📸 太湖绝景</span>
+          </div>
+          <div class="sc-desc">⚠️ 定位「充山大门」入口。太湖最美观景处，下午光线好，可以坐船到对岸小岛。预留至少4小时。</div>
+        </div>
+        <div class="transit">🚇 地铁/公交 → 南长街</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-wx">4</div><div class="stop-line line-wx"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="wx-4" onclick="toggle('wx-4','wx')">
+          <div class="sc-top">
+            <div class="sc-name" id="wx-4-name">南长街 · 夜游</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.2987,31.5560&name=南长街&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-wx-4">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-night">🌙 19:00–20:30</span>
+            <span class="tag t-food">🍗 推荐餐厅</span>
+          </div>
+          <div class="sc-desc">
+            晚上的南长街灯火通明超好看，可以坐游船。<br>
+            🍴 <b style="color:var(--cream2)">鸡鸭鹅大酒店</b> / <b style="color:var(--cream2)">三凤酒家</b>——本地人推荐，正宗无锡菜，酱排骨必点！
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="food-section">
+    <div class="food-hdr" onclick="toggleFood(this)">
+      <span style="font-size:16px">🦴</span>
+      <span class="food-hdr-text">无锡美食清单</span>
+      <span class="food-arrow">▼</span>
+    </div>
+    <div class="food-body">
+      <span class="food-chip">酱排骨⭐</span><span class="food-chip">清水油面筋</span>
+      <span class="food-chip">太湖三白</span><span class="food-chip">玉兰饼</span>
+      <span class="food-chip">鲜肉小笼包</span><span class="food-chip">开洋馄饨</span>
+      <span class="food-chip">银丝面</span><span class="food-chip">惠山油酥</span>
+      <span class="food-chip">豆腐花</span><span class="food-chip">桂花糖芋</span>
+      <span class="food-chip">手推馄饨</span><span class="food-chip">红汤细面</span>
+    </div>
+  </div>
+
+  <div class="note-box note-wx">
+    <div class="note-title">⏰ 无锡时间节点</div>
+    <div class="note-text">
+      8:30 惠山古镇 → 10:00 锡惠公园 → 12:00 出发去鼋头渚 → 18:00 收队 → 19:00 南长街晚饭+夜游 → 21:00 出发无锡站
+    </div>
+  </div>
+
+  <div class="map-frame">
+    <div class="map-placeholder">
+      <div class="map-placeholder-title">📍 无锡景点高德导航</div>
+      <div class="map-links">
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.2730,31.5780&name=惠山古镇&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🏛</span>惠山古镇</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.2748,31.5813&name=锡惠公园&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🌿</span>锡惠公园</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.2267,31.5100&name=鼋头渚充山大门&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🌊</span>鼋头渚</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.2987,31.5560&name=南长街&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🏮</span>南长街</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="done-banner" id="wx-done">🎉 无锡全部打卡完成！</div>
+</div>
+
+<!-- ============================== SUZHOU ============================== -->
+<div class="section" id="sec-sz">
+  <div class="progress-bar-section">
+    <div class="progress-row">
+      <div class="progress-lbl">苏州打卡进度</div>
+      <div class="progress-num" id="sz-cnt" style="color:var(--blue2)">0 / 9</div>
+    </div>
+    <div class="p-track"><div class="p-fill p-sz" id="sz-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="day-hdr day-hdr-sz">
+    <div class="day-badge badge-sz">· 周一 DAY 1 ·</div>
+    <div class="day-title">拙政园 → 平江路 → 双塔市集 → 金鸡湖</div>
+    <div class="day-route">6号线拙政园苏博站起 · 晚上李公堤酒吧</div>
+  </div>
+
+  <div class="stops">
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">1</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-1" onclick="toggle('sz-1','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-1-name">拙政园</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.6282,31.3265&name=拙政园&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-1">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-metro">🚇 6号线拙政园苏博站</span>
+            <span class="tag t-time">⏰ 约2小时</span>
+            <span class="tag t-photo">📸 世界文化遗产</span>
+          </div>
+          <div class="sc-desc">苏州最经典园林，UNESCO世界文化遗产。早去人少，中式园林美学在这里一次看够。旁边苏州博物馆也很值得逛（贝聿铭设计）。</div>
+        </div>
+        <div class="transit">🚇 6号线 → 1号线相门站</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">2</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-2" onclick="toggle('sz-2','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-2-name">平江路</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.6377,31.3231&name=平江路历史街区&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-2">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-metro">🚇 1号线相门站</span>
+            <span class="tag t-price">🎫 免费</span>
+            <span class="tag t-photo">📸 古城最完整历史街区</span>
+            <span class="tag t-time">⏰ 约3小时</span>
+          </div>
+          <div class="sc-desc">苏州古城保存最完整的历史街区，小桥流水白墙黛瓦，临河吃饭喝茶，怎么拍怎么好看。</div>
+        </div>
+        <div class="transit">🚶 步行 → 双塔市集</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">3</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-3" onclick="toggle('sz-3','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-3-name">双塔市集</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.6320,31.3139&name=双塔市集&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-3">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-food">🥟 当地小吃</span>
+            <span class="tag t-price">🎫 免费进入</span>
+          </div>
+          <div class="sc-desc">当地人爱去的生活市集，生煎、桂花糕等苏式小吃在这里吃最正宗。解决午饭或下午茶！</div>
+        </div>
+        <div class="transit">🚇 地铁 → 金鸡湖</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">4</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-4" onclick="toggle('sz-4','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-4-name">金鸡湖 · 摩天轮 · 苏州裤衩</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.7268,31.2997&name=金鸡湖摩天轮&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-4">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-metro">🚇 1号线金鸡湖站</span>
+            <span class="tag t-photo">📸 现代地标</span>
+            <span class="tag t-night">🌙 夜晚更美</span>
+          </div>
+          <div class="sc-desc">摩天轮能俯瞰金鸡湖全景，「苏州裤衩」（东方之门）对面就是。傍晚来最美，拍城市夜景绝了。</div>
+        </div>
+        <div class="transit">🚶 步行 → 李公堤</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">5</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-5" onclick="toggle('sz-5','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-5-name">李公堤 · 夜晚酒吧</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.7198,31.2933&name=李公堤&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-5">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-night">🌙 21:00后最热闹</span>
+            <span class="tag t-photo">📸 对面东方之门</span>
+          </div>
+          <div class="sc-desc">⚠️ 晚上9点后去，酒吧全开才是氛围。对岸就是东方之门（苏州裤衩），隔湖对望拍照极好。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sec-div"><div class="sec-div-line"></div><span>✦ 周二 ✦</span><div class="sec-div-line"></div></div>
+
+  <div class="day-hdr day-hdr-sz">
+    <div class="day-badge badge-sz">· 周二 DAY 2 ·</div>
+    <div class="day-title">观前街 → 留园 → 西园寺 → 七里山塘</div>
+    <div class="day-route">寺庙+园林+水街 · 住苏州站附近方便返程</div>
+  </div>
+
+  <div class="stops">
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">6</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-6" onclick="toggle('sz-6','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-6-name">观前街</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.6187,31.3102&name=观前街&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-6">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-metro">🚇 4号线察院场站</span>
+            <span class="tag t-price">🎫 免费</span>
+          </div>
+          <div class="sc-desc">苏州最热闹的商业步行街，早饭和逛街在这里搞定。旁边有玄妙观可以顺路打卡。</div>
+        </div>
+        <div class="transit">🚇 2号线 → 石路站</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">7</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-7" onclick="toggle('sz-7','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-7-name">留园</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.5935,31.3225&name=留园&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-7">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-metro">🚇 2号线石路站</span>
+            <span class="tag t-photo">📸 四大名园之一</span>
+          </div>
+          <div class="sc-desc">苏州四大名园之一，以奇石假山著称。比拙政园更精致幽深，喜欢园林必去。</div>
+        </div>
+        <div class="transit">🚶 步行 → 西园寺</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">8</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-8" onclick="toggle('sz-8','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-8-name">西园寺 / 寒山寺</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.5918,31.3218&name=西园寺&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-8">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-time">⏰ 约1小时</span>
+            <span class="tag t-photo">📸 五百罗汉堂</span>
+          </div>
+          <div class="sc-desc">西园寺有著名的五百罗汉堂，每尊罗汉表情不同，值得细看。寒山寺可以敲钟，都很值得。</div>
+        </div>
+        <div class="transit">🚇 2号线 → 山塘街站</div>
+      </div>
+    </div>
+
+    <div class="stop-row">
+      <div class="stop-tl"><div class="stop-dot dot-sz">9</div><div class="stop-line line-sz"></div></div>
+      <div class="stop-body">
+        <div class="stop-card" id="sz-9" onclick="toggle('sz-9','sz')">
+          <div class="sc-top">
+            <div class="sc-name" id="sz-9-name">七里山塘街</div>
+            <div class="sc-actions">
+              <a class="map-btn" href="https://uri.amap.com/marker?position=120.5875,31.3265&name=七里山塘&src=myapp&coordinate=gaode&callnative=1" target="_blank">📍 导航</a>
+              <div class="cb-btn" id="cb-sz-9">✓</div>
+            </div>
+          </div>
+          <div class="sc-tags">
+            <span class="tag t-metro">🚇 2号线山塘街站</span>
+            <span class="tag t-time">⏰ 约2小时</span>
+            <span class="tag t-photo">📸 临河喝茶游船</span>
+          </div>
+          <div class="sc-desc">苏州最美古街，临河喝茶、坐小船穿街而过，拍照出片极高。傍晚灯笼亮起来是完美收尾。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="food-section">
+    <div class="food-hdr" onclick="toggleFood(this)">
+      <span style="font-size:16px">🥢</span>
+      <span class="food-hdr-text">苏州美食清单</span>
+      <span class="food-arrow">▼</span>
+    </div>
+    <div class="food-body">
+      <span class="food-chip">生煎包⭐</span><span class="food-chip">桂花糕</span>
+      <span class="food-chip">苏式汤面</span><span class="food-chip">阳澄湖大闸蟹</span>
+      <span class="food-chip">松鼠鳜鱼</span><span class="food-chip">碧螺虾仁</span>
+      <span class="food-chip">苏式月饼</span><span class="food-chip">枣泥拉糕</span>
+    </div>
+  </div>
+
+  <div class="note-box note-sz">
+    <div class="note-title">🏨 住宿建议</div>
+    <div class="note-text">推荐住在苏州站附近，返程方便。平江路周边民宿氛围感最好但价格稍高，苏州火车站步行圈内有很多连锁酒店性价比高。</div>
+  </div>
+
+  <div class="map-frame">
+    <div class="map-placeholder">
+      <div class="map-placeholder-title">📍 苏州景点高德导航</div>
+      <div class="map-links">
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.6282,31.3265&name=拙政园&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🌿</span>拙政园</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.6377,31.3231&name=平江路&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🛤</span>平江路</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.6320,31.3139&name=双塔市集&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🥟</span>双塔市集</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.7268,31.2997&name=金鸡湖&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🎡</span>金鸡湖</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.7198,31.2933&name=李公堤&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🌃</span>李公堤</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.5935,31.3225&name=留园&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🏛</span>留园</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.5918,31.3218&name=西园寺&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">⛩</span>西园寺</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.5875,31.3265&name=七里山塘&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">⛵</span>七里山塘</a>
+        <a class="map-link" href="https://uri.amap.com/marker?position=120.6187,31.3102&name=观前街&src=myapp&callnative=1" target="_blank"><span class="map-link-icon">🛍</span>观前街</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="done-banner" id="sz-done">🎉 苏州全部打卡完成！旅途愉快～</div>
+</div>
+
+<!-- ============================== PACKING ============================== -->
+<div class="section" id="sec-bag">
+  <div class="pack-section">
+    <div class="pack-title">行李清单</div>
+    <div class="pack-sub">点击打勾 · 出发前逐项确认</div>
+
+    <div class="pack-progress">
+      <div class="pack-progress-row">
+        <div class="pack-progress-lbl">打包进度</div>
+        <div class="pack-progress-num" id="bag-cnt">0 / 18</div>
+      </div>
+      <div class="p-track"><div class="p-fill" id="bag-bar" style="width:0%;background:var(--gold2)"></div></div>
+    </div>
+
+    <div class="pack-cat">
+      <div class="pack-cat-title">📋 必带证件 & 电子</div>
+      <div class="pack-grid">
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-1">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🪪</span><span>身份证</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-2">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🔋</span><span>充电器</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-3">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">📱</span><span>充电宝</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-4">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">📷</span><span>相机</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-5">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">💾</span><span>相机备用电池</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pack-cat">
+      <div class="pack-cat-title">☔ 天气装备</div>
+      <div class="pack-grid">
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-6">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">☂️</span><span>雨伞</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-7">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🧴</span><span>防晒霜</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-8">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🦟</span><span>防蚊喷雾</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-9">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🧤</span><span>护手霜</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pack-cat">
+      <div class="pack-cat-title">👟 穿着</div>
+      <div class="pack-grid">
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-10">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">👟</span><span>舒适步行鞋</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-11">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🧦</span><span>备用袜子</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-12">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🧥</span><span>薄外套/防风衣</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-13">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">👜</span><span>小背包/斜挎包</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pack-cat">
+      <div class="pack-cat-title">💊 日用 & 健康</div>
+      <div class="pack-grid">
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-14">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">💊</span><span>常用药</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-15">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🩹</span><span>创可贴（防磨脚）</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-16">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">💧</span><span>保温水杯</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-17">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">🪥</span><span>洗漱用品</span>
+        </div>
+        <div class="pack-item" onclick="toggleBag(this)" id="bag-18">
+          <div class="pack-check">✓</div>
+          <span class="pack-icon">💳</span><span>银行卡/零钱</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="done-banner show" id="bag-done" style="display:none;margin-top:16px">
+      🎒 行李收拾完毕，出发！
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ---- STATE ----
+const state = {
+  nj: { checked: new Set(), total: 9 },
+  wx: { checked: new Set(), total: 4 },
+  sz: { checked: new Set(), total: 9 },
+  bag: { checked: new Set(), total: 18 }
+};
+
+// ---- TAB SWITCH ----
+function switchTab(city) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.className = 'tab-btn';
+  });
+  document.getElementById('sec-' + city).classList.add('active');
+  document.getElementById('tab-' + city).classList.add('active-' + city);
+
+  const hero = document.querySelector('.hero');
+  hero.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ---- TOGGLE STOP ----
+function toggle(id, city) {
+  const card = document.getElementById(id);
+  const cb = card.querySelector('.cb-btn');
+  const name = card.querySelector('.sc-name');
+
+  const isOn = state[city].checked.has(id);
+  if (isOn) {
+    state[city].checked.delete(id);
+    card.classList.remove('done');
+    name.classList.remove('struck');
+    cb.classList.remove('on');
+  } else {
+    state[city].checked.add(id);
+    card.classList.add('done');
+    name.classList.add('struck');
+    cb.classList.add('on');
+  }
+
+  cb.classList.add('pop');
+  setTimeout(() => cb.classList.remove('pop'), 200);
+
+  updateProgress(city);
+}
+
+// ---- UPDATE PROGRESS ----
+function updateProgress(city) {
+  const c = state[city].checked.size;
+  const t = state[city].total;
+  const pct = (c / t) * 100;
+
+  if (city === 'bag') {
+    document.getElementById('bag-cnt').textContent = c + ' / ' + t;
+    document.getElementById('bag-bar').style.width = pct + '%';
+    const banner = document.getElementById('bag-done');
+    banner.style.display = c === t ? 'block' : 'none';
+  } else {
+    document.getElementById(city + '-cnt').textContent = c + ' / ' + t;
+    document.getElementById(city + '-bar').style.width = pct + '%';
+    const banner = document.getElementById(city + '-done');
+    if (c === t) {
+      banner.classList.add('show');
+    } else {
+      banner.classList.remove('show');
+    }
+  }
+}
+
+// ---- TOGGLE BAG ----
+function toggleBag(item) {
+  const id = item.id;
+  const check = item.querySelector('.pack-check');
+  const isOn = state.bag.checked.has(id);
+
+  if (isOn) {
+    state.bag.checked.delete(id);
+    item.classList.remove('packed');
+    check.style.background = '';
+    check.style.borderColor = '';
+    check.style.color = 'transparent';
+  } else {
+    state.bag.checked.add(id);
+    item.classList.add('packed');
+    check.style.background = 'var(--green)';
+    check.style.borderColor = 'var(--green)';
+    check.style.color = 'white';
+  }
+
+  item.classList.add('pop');
+  setTimeout(() => item.classList.remove('pop'), 200);
+  updateProgress('bag');
+}
+
+// ---- FOOD TOGGLE ----
+function toggleFood(hdr) {
+  const body = hdr.nextElementSibling;
+  const arrow = hdr.querySelector('.food-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
